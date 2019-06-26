@@ -1,0 +1,29 @@
+version: '3.5'
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./database:/var/lib/mysql
+    ports:
+      - "3307:3306"
+  app:
+    container_name: app
+    build:
+      context: ..
+      dockerfile: railsdock/app/Dockerfile
+    command: rails s -b "0.0.0.0"
+    volumes:
+      - ..:/my_app
+    ports:
+      - "3001:3000"
+    environment:
+      DATABASE_HOST: mysql
+      DATABASE_USER_NAME: root
+      DATABASE_PASSWORD: root
+    stdin_open: true
+    tty: true
