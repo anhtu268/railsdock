@@ -16,7 +16,7 @@ services:
     build:
       context: ..
       dockerfile: railsdock/app/Dockerfile
-    command: rails s -b "0.0.0.0"
+    command: bash
     volumes:
       - ..:/my_app
     ports:
