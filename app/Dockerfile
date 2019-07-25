@@ -16,6 +16,9 @@ WORKDIR $APP_PATH
 ADD railsdock/app/Gemfile /my_app/Gemfile
 ADD railsdock/app/Gemfile.lock /my_app/Gemfile.lock
 
+# Copy data from host to container
+ADD . $APP_PATH
+
 # update Rubygems
 RUN gem update --system
 
@@ -23,8 +26,3 @@ RUN gem update --system
 RUN gem install bundler
 
 RUN bundle install
-
-# Copy data from host to container
-ADD . $APP_PATH
-
-RUN yarn install
